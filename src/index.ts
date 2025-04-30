@@ -14,6 +14,7 @@ import { groq } from './llm/groq'
 import { auzreOpenAI } from './llm/azure'
 import { bailian } from './llm/bailian'
 import { cohere } from './llm/cohere'
+import { xai } from './llm/xai'
 
 interface Bindings {
   API_KEY: string
@@ -33,6 +34,7 @@ function getModels(env: Record<string, string>) {
     auzreOpenAI(env),
     cohere(env),
     bailian(env),
+    xai(env),
   ].filter((it) => it.requiredEnv.every((it) => it in env))
 }
 
@@ -104,12 +106,12 @@ curl https://api.openai.com/v1/chat/completions \
       data: getModels(c.env as any).flatMap((it) =>
         it.supportModels.map(
           (model) =>
-            ({
-              id: model,
-              object: 'model',
-              owned_by: it.name,
-              created: Math.floor(Date.now() / 1000),
-            } as OpenAI.Models.Model),
+          ({
+            id: model,
+            object: 'model',
+            owned_by: it.name,
+            created: Math.floor(Date.now() / 1000),
+          } as OpenAI.Models.Model),
         ),
       ),
     } as OpenAI.Models.ModelsPage)

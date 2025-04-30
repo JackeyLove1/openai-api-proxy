@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Deployment Guide
+
+This project can be deployed to any Edge Runtime environment, with Cloudflare Workers being the primary target.
+
+## Local Development
+
+To run the project locally for development, use:
+
+```
+pnpm dev
+```
+
+This uses [wrangler](mdc:wrangler.toml) for local development.
+
+## Cloudflare Workers Deployment
+
+To deploy to Cloudflare Workers:
+
+```
+pnpm deploy
+```
+
+Or use the Deploy button in the [README.md](mdc:README.md).
+
+## Environment Variables for Deployment
+
+Make sure to set the necessary environment variables in your deployment environment based on which LLM providers you want to support. See [Environment Configuration](mdc:.cursor/rules/environment-config.mdc) for details.
+
+## Configuration Files
+
+- [wrangler.toml](mdc:wrangler.toml) - Configuration for Cloudflare Workers deployment
+- [package.json](mdc:package.json) - NPM scripts for development and deployment
+
